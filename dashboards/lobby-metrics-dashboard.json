@@ -1,0 +1,82 @@
+{
+  "id": null,
+  "uid": "lobby-metrics-dashboard",
+  "title": "Lobby Metrics Dashboard",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 0,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "lobby.hook.create",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"lobby.hook.create\")", "refId": "A" }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "lobby.hook.join",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"lobby.hook.join\")", "refId": "B" }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "lobby.hook.size",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"lobby.hook.size\")", "refId": "C" }
+      ],
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "lobby.segment",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"lobby.segment\")", "refId": "D" }
+      ],
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "lobby.socket.getSris",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"lobby.socket.getSris\")", "refId": "E" }
+      ],
+      "gridPos": { "x": 0, "y": 16, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "lobby.socket.hookSubscribers",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"lobby.socket.hookSubscribers\")", "refId": "F" }
+      ],
+      "gridPos": { "x": 12, "y": 16, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "lobby.socket.idle",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"lobby.socket.idle\")", "refId": "G" }
+      ],
+      "gridPos": { "x": 0, "y": 24, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "lobby.socket.member",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"lobby.socket.member\")", "refId": "H" }
+      ],
+      "gridPos": { "x": 12, "y": 24, "w": 12, "h": 8 }
+    }
+  ]
+}

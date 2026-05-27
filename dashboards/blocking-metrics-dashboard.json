@@ -1,0 +1,28 @@
+{
+  "id": null,
+  "uid": "blocking-metrics-dashboard",
+  "title": "Blocking Metrics Dashboard",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 0,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "blocking.time",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"blocking.time\")", "refId": "A" }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "blocking.timeout",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"blocking.timeout\")", "refId": "B" }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 }
+    }
+  ]
+}

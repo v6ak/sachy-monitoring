@@ -1,0 +1,105 @@
+{
+  "id": null,
+  "uid": "lila-fishnet-metrics-dashboard",
+  "tags": ["fishnet", "lila-fishnet", "lc0ingerie", "AI"],
+  "title": "Lila Fishnet Metrics Dashboard",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 0,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "DB Metrics",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"db.acquired\")",
+          "refId": "E",
+          "alias": "DB Acquired"
+        },
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"db.queued\")",
+          "refId": "F",
+          "alias": "DB Queued"
+        },
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"db.size\")",
+          "refId": "G",
+          "alias": "DB Size"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Move Acquired Level 8",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"move.acquired.lvl8\")",
+          "refId": "H",
+          "alias": "Move Acquired Level 8"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Move Full Level 1",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"move.full.lvl1\")",
+          "refId": "I",
+          "alias": "Move Full Level 1"
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 8,
+        "w": 12,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      }
+    }
+  ]
+}

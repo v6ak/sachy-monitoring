@@ -1,0 +1,10 @@
+{
+  "id": null,
+  "uid": "lila-metrics-dashboard",
+  "title": "Lila Metrics Dashboard",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 0,
+  "panels": [
+ ]
+}

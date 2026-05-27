@@ -1,0 +1,167 @@
+{
+  "id": null,
+  "uid": "jvm-metrics-dashboard",
+  "title": "JVM Metrics Dashboard",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 0,
+  "templating": {
+    "list": [
+      {
+        "type": "query",
+        "datasource": "influxdb-flux",
+        "name": "host",
+        "query": "import \"influxdata/influxdb/schema\" schema.tagValues(bucket: \"bucketakke\", tag: \"host\")",
+        "refresh": 1,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*",
+        "label": "Host",
+        "hide": 0
+      },
+      {
+        "type": "query",
+        "datasource": "influxdb-flux",
+        "name": "service",
+        "query": "import \"influxdata/influxdb/schema\" schema.tagValues(bucket: \"bucketakke\", tag: \"service\")",
+        "refresh": 1,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*",
+        "label": "Service",
+        "hide": 0
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "JVM Memory Utilization",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") and (r.service =~ /$service/ or \"$service\" == \".*\")) |> filter(fn: (r) => r._measurement == \"jvm.memory.utilization\")",
+          "refId": "C"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "JVM GC",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") and (r.service =~ /$service/ or \"$service\" == \".*\")) |> filter(fn: (r) => r._measurement == \"jvm.gc\")",
+          "refId": "K",
+          "alias": "JVM GC"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 8,
+        "w": 24,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      }
+    },
+    {
+        "type": "timeseries",
+        "title": "Hiccups",
+        "datasource": "influxdb-flux",
+        "targets": [
+          {
+            "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") and (r.service =~ /$service/ or \"$service\" == \".*\")) |> filter(fn: (r) => r._measurement == \"process.hiccups\")",
+            "refId": "D",
+            "alias": "Hiccups"
+          }
+        ],
+        "gridPos": {
+          "x": 0,
+          "y": 8,
+          "w": 24,
+          "h": 8
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "hideSeries": false
+            }
+          }
+        },
+        "options": {
+          "stacked": false
+        }
+    },
+    {
+      "type": "timeseries",
+      "title": "JVM Threads States",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") and (r.service =~ /$service/ or \"$service\" == \".*\")) |> filter(fn: (r) => r._measurement == \"jvm.threads.states\")",
+          "refId": "L",
+          "alias": "JVM Threads States"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 16,
+        "w": 24,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "JVM Memory Pool Used",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") and (r.service =~ /$service/ or \"$service\" == \".*\")) |> filter(fn: (r) => r._measurement == \"jvm.memory.pool.used\")",
+          "refId": "M",
+          "alias": "JVM Memory Pool Used"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 24,
+        "w": 24,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      }
+    }
+  ]
+}

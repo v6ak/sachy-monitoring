@@ -1,0 +1,63 @@
+{
+  "title": "X509 Certificates Expiry",
+  "uid": "x509-expiry",
+  "schemaVersion": 27,
+  "version": 1,
+  "refresh": "1m",
+  "panels": [
+    {
+      "type": "table",
+      "title": "Certificates by Expiry",
+      "datasource": "influxdb-flux",
+      "gridPos": { "h": 15, "w": 24, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "query": "from(bucket: \"telegraf\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r._measurement == \"x509_cert\" and r._field == \"expiry\" and r.type == \"leaf\")\n  |> group()\n  |> sort(columns: [\"_time\"], desc: true)\n  |> unique(column: \"common_name\")\n  |> sort(columns: [\"_value\"], desc: false)\n  |> map(fn: (r) => ({ r with expiry_date: time(v: uint(v: int(v: r._time) + int(v: r._value) * 1000000000)) }))",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "displayName": "expiry_date",
+            "desc": false
+          }
+        ]
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "expiry_date" },
+            "properties": [
+              { "id": "displayName", "value": "Expiry Date" },
+              { "id": "unit", "value": "dateTimeAsIso" }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "_value" },
+            "properties": [
+              { "id": "displayName", "value": "Expiry (seconds)" },
+              { "id": "colorMode", "value": "cell" },
+              { "id": "custom.displayMode", "value": "color-background" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [ { "color": "red", "value": null }, { "color": "green", "value": 2592000 } ] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "_time" },
+            "properties": [
+              { "id": "displayName", "value": "Measurement Time" }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "time": {
+    "from": "now-3d",
+    "to": "now"
+  }
+}

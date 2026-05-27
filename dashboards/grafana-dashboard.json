@@ -1,0 +1,276 @@
+{
+  "id": null,
+  "uid": null,
+  "title": "System Metrics Dashboard",
+  "tags": ["os"],
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 0,
+  "templating": {
+    "list": [
+      {
+        "type": "query",
+        "datasource": "influxdb-flux",
+        "name": "host",
+        "query": "import \"influxdata/influxdb/schema\" schema.tagValues(bucket: \"bucketakke\", tag: \"host\")",
+        "refresh": 1,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*",
+        "label": "Host",
+        "hide": 0
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "CPU Usage",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") ) |> filter(fn: (r) => r._measurement == \"host.cpu.usage\") |> map(fn: (r) => ({ r with _value: float(v: r._value) / 1000000.0 }))",
+          "refId": "A"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory Usage",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") ) |> filter(fn: (r) => r._measurement == \"host.memory.usage\")",
+          "refId": "B"
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 8
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Free Space",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\")) |> filter(fn: (r) => r._measurement == \"host.storage.mount.space.free\") |> map(fn: (r) => ({ r with _value: float(v: r._value) }) ) |> map(fn: (r) => ({ r with _value: r._value / 1024.0 / 1024.0 / 1024.0 }))",
+          "refId": "J",
+          "alias": "Free Space (GB)"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 32,
+        "w": 24,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      },
+      "alert": {
+        "name": "Free Space Low Alert",
+        "conditions": [
+          {
+            "evaluator": { "type": "lt", "params": [5] },
+            "operator": { "type": "and" },
+            "query": { "params": ["A", "5m", "now"] },
+            "reducer": { "type": "avg" },
+            "type": "query"
+          }
+        ],
+        "executionErrorState": "alerting",
+        "for": "5m",
+        "frequency": "1m",
+        "handler": 1,
+        "message": "Free space is below 5GB on at least one host.",
+        "noDataState": "no_data",
+        "notifications": []
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "CPU Usage",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") ) |> filter(fn: (r) => r._measurement == \"host.cpu.usage\")",
+          "refId": "L",
+          "alias": "CPU Usage"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 64,
+        "w": 12,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory Usage",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") ) |> filter(fn: (r) => r._measurement == \"host.memory.usage\")",
+          "refId": "M",
+          "alias": "Memory Usage"
+        }
+      ],
+      "gridPos": {
+        "x": 12,
+        "y": 64,
+        "w": 12,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Network Data Read/Write",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") ) |> filter(fn: (r) => r._measurement == \"host.network.data.read\")",
+          "refId": "N",
+          "alias": "Data Read"
+        },
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") ) |> filter(fn: (r) => r._measurement == \"host.network.data.write\")",
+          "refId": "O",
+          "alias": "Data Write"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 72,
+        "w": 24,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": false
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Swap Metrics (Stacked)",
+      "datasource": "influxdb-flux",
+      "targets": [
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") ) |> filter(fn: (r) => r._measurement == \"host.swap.usage\")",
+          "refId": "P",
+          "alias": "Swap Usage"
+        },
+        {
+          "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => (r.host =~ /$host/ or \"$host\" == \".*\") ) |> filter(fn: (r) => r._measurement == \"host.swap.free\")",
+          "refId": "Q",
+          "alias": "Swap Free"
+        }
+      ],
+      "gridPos": {
+        "x": 0,
+        "y": 80,
+        "w": 24,
+        "h": 8
+      },
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideSeries": false
+          }
+        }
+      },
+      "options": {
+        "stacked": true,
+        "fillOpacity": 70
+      }
+    },
+    {
+        "type": "timeseries",
+        "title": "process.cpu.usage",
+        "datasource": "influxdb-flux",
+        "targets": [
+          { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"process.cpu.usage\")", "refId": "F" }
+        ],
+        "gridPos": { "x": 12, "y": 16, "w": 12, "h": 8 }
+      },
+      {
+        "type": "timeseries",
+        "title": "process.hiccups",
+        "datasource": "influxdb-flux",
+        "targets": [
+          { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"process.hiccups\")", "refId": "G" }
+        ],
+        "gridPos": { "x": 0, "y": 24, "w": 12, "h": 8 }
+      },
+      {
+        "type": "timeseries",
+        "title": "process.ulimit.file-descriptors.max",
+        "datasource": "influxdb-flux",
+        "targets": [
+          { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"process.ulimit.file-descriptors.max\")", "refId": "H" }
+        ],
+        "gridPos": { "x": 12, "y": 24, "w": 12, "h": 8 }
+      },
+      {
+        "type": "timeseries",
+        "title": "process.ulimit.file-descriptors.used",
+        "datasource": "influxdb-flux",
+        "targets": [
+          { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"process.ulimit.file-descriptors.used\")", "refId": "I" }
+        ],
+        "gridPos": { "x": 0, "y": 32, "w": 12, "h": 8 }
+      },
+      {
+        "type": "timeseries",
+        "title": "kamon.trace.sampler.decisions",
+        "datasource": "influxdb-flux",
+        "targets": [
+          { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"kamon.trace.sampler.decisions\")", "refId": "J" }
+        ],
+        "gridPos": { "x": 12, "y": 32, "w": 12, "h": 8 }
+      }
+    ]
+}

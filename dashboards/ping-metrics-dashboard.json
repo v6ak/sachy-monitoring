@@ -1,0 +1,19 @@
+{
+  "id": null,
+  "uid": "ping-metrics-dashboard",
+  "title": "Ping Metrics Dashboard",
+  "timezone": "browser",
+  "schemaVersion": 36,
+  "version": 0,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "ping",
+      "datasource": "influxdb-flux",
+      "targets": [
+        { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"ping\")", "refId": "A" }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 8 }
+    }
+  ]
+}
