@@ -1,17 +1,136 @@
 {
-  "id": null,
-  "uid": "game-metrics-dashboard",
-  "title": "Game Metrics Dashboard",
-  "timezone": "browser",
-  "schemaVersion": 36,
-  "version": 0,
-  "panels": [
-    { "type": "timeseries", "title": "game.fetch.count", "datasource": "influxdb-flux", "targets": [ { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.fetch.count\")", "refId": "A" } ], "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 } },
-    { "type": "timeseries", "title": "game.finish", "datasource": "influxdb-flux", "targets": [ { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.finish\")", "refId": "B" } ], "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 } },
-    { "type": "timeseries", "title": "game.idCollision", "datasource": "influxdb-flux", "targets": [ { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.idCollision\")", "refId": "C" } ], "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 } },
-    { "type": "timeseries", "title": "game.idGenerator", "datasource": "influxdb-flux", "targets": [ { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.idGenerator\")", "refId": "D" } ], "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 } },
-    { "type": "timeseries", "title": "game.loadClockHistory.count", "datasource": "influxdb-flux", "targets": [ { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.loadClockHistory.count\")", "refId": "E" } ], "gridPos": { "x": 0, "y": 16, "w": 12, "h": 8 } },
-    { "type": "timeseries", "title": "game.pgn.decode", "datasource": "influxdb-flux", "targets": [ { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.pgn.decode\")", "refId": "F" } ], "gridPos": { "x": 12, "y": 16, "w": 12, "h": 8 } },
-    { "type": "timeseries", "title": "game.pgn.encode", "datasource": "influxdb-flux", "targets": [ { "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.pgn.encode\")", "refId": "G" } ], "gridPos": { "x": 0, "y": 24, "w": 12, "h": 8 } }
-  ]
+  "apiVersion": "dashboard.grafana.app/v0alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "game-metrics-dashboard"
+  },
+  "spec": {
+    "id": null,
+    "uid": "game-metrics-dashboard",
+    "title": "Game Metrics Dashboard",
+    "timezone": "browser",
+    "schemaVersion": 36,
+    "version": 0,
+    "panels": [
+      {
+        "type": "timeseries",
+        "title": "game.fetch.count",
+        "datasource": "influxdb-flux",
+        "targets": [
+          {
+            "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.fetch.count\")",
+            "refId": "A"
+          }
+        ],
+        "gridPos": {
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 8
+        }
+      },
+      {
+        "type": "timeseries",
+        "title": "game.finish",
+        "datasource": "influxdb-flux",
+        "targets": [
+          {
+            "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.finish\")",
+            "refId": "B"
+          }
+        ],
+        "gridPos": {
+          "x": 12,
+          "y": 0,
+          "w": 12,
+          "h": 8
+        }
+      },
+      {
+        "type": "timeseries",
+        "title": "game.idCollision",
+        "datasource": "influxdb-flux",
+        "targets": [
+          {
+            "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.idCollision\")",
+            "refId": "C"
+          }
+        ],
+        "gridPos": {
+          "x": 0,
+          "y": 8,
+          "w": 12,
+          "h": 8
+        }
+      },
+      {
+        "type": "timeseries",
+        "title": "game.idGenerator",
+        "datasource": "influxdb-flux",
+        "targets": [
+          {
+            "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.idGenerator\")",
+            "refId": "D"
+          }
+        ],
+        "gridPos": {
+          "x": 12,
+          "y": 8,
+          "w": 12,
+          "h": 8
+        }
+      },
+      {
+        "type": "timeseries",
+        "title": "game.loadClockHistory.count",
+        "datasource": "influxdb-flux",
+        "targets": [
+          {
+            "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.loadClockHistory.count\")",
+            "refId": "E"
+          }
+        ],
+        "gridPos": {
+          "x": 0,
+          "y": 16,
+          "w": 12,
+          "h": 8
+        }
+      },
+      {
+        "type": "timeseries",
+        "title": "game.pgn.decode",
+        "datasource": "influxdb-flux",
+        "targets": [
+          {
+            "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.pgn.decode\")",
+            "refId": "F"
+          }
+        ],
+        "gridPos": {
+          "x": 12,
+          "y": 16,
+          "w": 12,
+          "h": 8
+        }
+      },
+      {
+        "type": "timeseries",
+        "title": "game.pgn.encode",
+        "datasource": "influxdb-flux",
+        "targets": [
+          {
+            "query": "from(bucket: \"bucketakke\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r._measurement == \"game.pgn.encode\")",
+            "refId": "G"
+          }
+        ],
+        "gridPos": {
+          "x": 0,
+          "y": 24,
+          "w": 12,
+          "h": 8
+        }
+      }
+    ]
+  }
 }
