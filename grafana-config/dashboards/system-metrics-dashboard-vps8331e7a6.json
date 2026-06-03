@@ -285,7 +285,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"bucketakke\") |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e filter(fn: (r) =\u003e r._measurement == \"host.system.load\") |\u003e filter(fn: (r) =\u003e r._field == \"load15\")",
+                        "query": "from(bucket: \"bucketakke\") |\u003e\nrange(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e\nfilter(fn: (r) =\u003e r._measurement == \"host.load.average\") |\u003e\nfilter(fn: (r) =\u003e r.period == \"15m\")",
                         "range": true
                       },
                       "version": "v0"
