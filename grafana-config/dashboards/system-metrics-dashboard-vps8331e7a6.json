@@ -779,7 +779,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"bucketakke\") |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e filter(fn: (r) =\u003e r._measurement == \"host.system.load\") |\u003e filter(fn: (r) =\u003e r._field == \"load1\")",
+                        "query": "from(bucket: \"bucketakke\") |\u003e\nrange(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e\nfilter(fn: (r) =\u003e r._measurement == \"host.load.average\") |\u003e\nfilter(fn: (r) =\u003e r.period == \"1m\")",
                         "range": true
                       },
                       "version": "v0"
@@ -954,12 +954,12 @@
             "spec": {
               "element": {
                 "kind": "ElementReference",
-                "name": "panel-12"
+                "name": "panel-13"
               },
               "height": 8,
               "width": 24,
               "x": 0,
-              "y": 24
+              "y": 16
             }
           },
           {
@@ -967,12 +967,12 @@
             "spec": {
               "element": {
                 "kind": "ElementReference",
-                "name": "panel-13"
+                "name": "panel-12"
               },
               "height": 8,
               "width": 24,
               "x": 0,
-              "y": 16
+              "y": 24
             }
           }
         ]
