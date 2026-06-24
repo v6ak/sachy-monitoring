@@ -786,12 +786,30 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\") |\u003e \nrange(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /vps-8df46691/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"disk\")\n",
+                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /vps-8df46691/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"disk\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"free\")",
                         "range": true
                       },
                       "version": "v0"
                     },
                     "refId": "J"
+                  }
+                },
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "aeke3o5ypjklcb"
+                      },
+                      "group": "influxdb",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /vps-8df46691/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"disk\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"total\")\n  |\u003e max()"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
                   }
                 }
               ],
@@ -862,7 +880,15 @@
                   },
                   "unit": "bytes"
                 },
-                "overrides": []
+                "overrides": [
+                  {
+                    "matcher": {
+                      "id": "byName",
+                      "options": "total"
+                    },
+                    "properties": []
+                  }
+                ]
               },
               "options": {
                 "annotations": {
