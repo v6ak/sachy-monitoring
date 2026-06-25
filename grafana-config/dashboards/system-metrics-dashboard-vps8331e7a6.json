@@ -1449,7 +1449,41 @@
       "timezone": "browser",
       "to": "now"
     },
-    "title": "System Metrics Dashboard vps-8331e7a6",
-    "variables": []
+    "title": "System Metrics Dashboard",
+    "variables": [
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "vps-8331e7a6.vps.ovh.net / staging2",
+            "value": "vps-8331e7a6.vps.ovh.net / staging2"
+          },
+          "definition": "import \"influxdata/influxdb/schema\" schema.tagValues(bucket: \"telegraf\", tag: \"host\")",
+          "hide": "dontHide",
+          "includeAll": false,
+          "label": "Host",
+          "multi": false,
+          "name": "host",
+          "options": [],
+          "query": {
+            "datasource": {
+              "name": "aeke3o5ypjklcb"
+            },
+            "group": "influxdb",
+            "kind": "DataQuery",
+            "spec": {
+              "query": "import \"influxdata/influxdb/schema\" schema.tagValues(bucket: \"telegraf\", tag: \"host\")"
+            },
+            "version": "v0"
+          },
+          "refresh": "onDashboardLoad",
+          "regex": ".*",
+          "regexApplyTo": "value",
+          "skipUrlSync": false,
+          "sort": "disabled"
+        }
+      }
+    ]
   }
 }
