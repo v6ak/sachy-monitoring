@@ -1129,16 +1129,18 @@
       {
         "kind": "QueryVariable",
         "spec": {
+          "allValue": ".*",
           "allowCustomValue": false,
           "current": {
-            "text": "",
-            "value": ""
+            "text": [],
+            "value": []
           },
           "description": "Filter on instance field of the query",
           "hide": "dontHide",
-          "includeAll": false,
+          "includeAll": true,
+          "label": "Instance",
           "multi": true,
-          "name": "Instance",
+          "name": "instance",
           "options": [],
           "query": {
             "datasource": {
