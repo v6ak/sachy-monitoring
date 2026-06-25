@@ -49,7 +49,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"cpu\")\n  |\u003e filter(fn: (r) =\u003e r.cpu == \"cpu-total\")",
+                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /${host}/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"cpu\")\n  |\u003e filter(fn: (r) =\u003e r.cpu == \"cpu-total\")",
                         "range": true
                       },
                       "version": "v0"
@@ -168,7 +168,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"system\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"load5\")",
+                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /${host}/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"system\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"load5\")",
                         "range": true
                       },
                       "version": "v0"
@@ -288,7 +288,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"system\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"load15\")",
+                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /${host}/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"system\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"load15\")",
                         "range": true
                       },
                       "version": "v0"
@@ -408,7 +408,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"disk\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"free\")",
+                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /${host}/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"disk\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"free\")",
                         "range": true
                       },
                       "version": "v0"
@@ -428,7 +428,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"disk\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"total\")\n  |\u003e max()",
+                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /${host}/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"disk\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"total\")\n  |\u003e max()",
                         "range": true
                       },
                       "version": "v0"
@@ -549,7 +549,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\") |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"swap\") |\u003e\nfilter(fn: (r) =\u003e r._field =~ /free/)",
+                        "query": "from(bucket: \"telegraf\") |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /${host}/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"swap\") |\u003e\nfilter(fn: (r) =\u003e r._field =~ /free/)",
                         "range": true
                       },
                       "version": "v0"
@@ -669,7 +669,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\") |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"swap\") |\u003e\nfilter(fn: (r) =\u003e r._field == \"used\")",
+                        "query": "from(bucket: \"telegraf\") |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /${host}/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"swap\") |\u003e\nfilter(fn: (r) =\u003e r._field == \"used\")",
                         "range": true
                       },
                       "version": "v0"
@@ -789,7 +789,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\") |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"swap\") |\u003e\nfilter(fn: (r) =\u003e r._field == \"used_percent\")",
+                        "query": "from(bucket: \"telegraf\") |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /${host}/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"swap\") |\u003e\nfilter(fn: (r) =\u003e r._field == \"used_percent\")",
                         "range": true
                       },
                       "version": "v0"
@@ -914,7 +914,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\") |\u003e \nrange(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"net\") |\u003e\nfilter(fn: (r) =\u003e r._field == \"bytes_recv\")",
+                        "query": "from(bucket: \"telegraf\") |\u003e \nrange(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /${host}/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"net\") |\u003e\nfilter(fn: (r) =\u003e r._field == \"bytes_recv\")",
                         "range": true
                       },
                       "version": "v0"
@@ -934,7 +934,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\") |\u003e \nrange(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"net\") |\u003e\nfilter(fn: (r) =\u003e r._field == \"bytes_sent\")",
+                        "query": "from(bucket: \"telegraf\") |\u003e \nrange(start: v.timeRangeStart, stop: v.timeRangeStop) |\u003e \nfilter(fn: (r) =\u003e r.host =~ /${host}/) |\u003e \nfilter(fn: (r) =\u003e r._measurement == \"net\") |\u003e\nfilter(fn: (r) =\u003e r._field == \"bytes_sent\")",
                         "range": true
                       },
                       "version": "v0"
@@ -1054,7 +1054,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"mem\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"used_percent\")",
+                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /${host}/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"mem\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"used_percent\")",
                         "range": true
                       },
                       "version": "v0"
@@ -1173,7 +1173,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "app": "grafana-assistant-app",
-                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /vps-8331e7a6/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"system\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"load1\")",
+                        "query": "from(bucket: \"telegraf\")\n  |\u003e range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |\u003e filter(fn: (r) =\u003e r.host =~ /${host}/)\n  |\u003e filter(fn: (r) =\u003e r._measurement == \"system\")\n  |\u003e filter(fn: (r) =\u003e r._field == \"load1\")",
                         "range": true
                       },
                       "version": "v0"
@@ -1456,8 +1456,8 @@
         "spec": {
           "allowCustomValue": true,
           "current": {
-            "text": "vps-8331e7a6.vps.ovh.net / staging2",
-            "value": "vps-8331e7a6.vps.ovh.net / staging2"
+            "text": "vps-8331e7a6.vps.ovh.net ",
+            "value": "vps-8331e7a6.vps.ovh.net "
           },
           "definition": "import \"influxdata/influxdb/schema\" schema.tagValues(bucket: \"telegraf\", tag: \"host\")",
           "hide": "dontHide",
@@ -1478,7 +1478,7 @@
             "version": "v0"
           },
           "refresh": "onDashboardLoad",
-          "regex": ".*",
+          "regex": "/(.*)//",
           "regexApplyTo": "value",
           "skipUrlSync": false,
           "sort": "disabled"
