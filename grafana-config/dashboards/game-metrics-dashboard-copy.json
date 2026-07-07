@@ -879,10 +879,10 @@
               "transformations": []
             }
           },
-          "description": "",
+          "description": "How long did it take for the computer to compute a move. Mean values.",
           "id": 8,
           "links": [],
-          "title": "New panel",
+          "title": "Round compute time",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
@@ -934,8 +934,8 @@
                         "value": 0
                       },
                       {
-                        "color": "red",
-                        "value": 80
+                        "color": "semi-dark-red",
+                        "value": 5000
                       }
                     ]
                   },
